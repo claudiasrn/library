@@ -73,6 +73,8 @@ const spineColors = [
 
 const myLibrary = [];
 
+const shelvesContainer = document.querySelector(".shelves-container");
+
 function Book(title, author, pages, read, genre) {
     this.id = crypto.randomUUID();
     this.title = title;
@@ -90,7 +92,6 @@ function addBookToLibrary(title, author, pages, read, genre) {
 }
 
 function updateDOM() {
-    const shelvesContainer = document.querySelector(".shelves-container");
     shelvesContainer.innerHTML = "";
 
     let bookRow;
@@ -125,6 +126,7 @@ function updateDOM() {
             let book = document.createElement("div");
             book.style.backgroundColor = spineColors[colorIndex].bodyMedium;
             book.classList.add("book");
+            book.dataset.id = myLibrary[index].id;
             bookRow.append(book);
 
             let bodyDark1 = document.createElement("div");
@@ -245,4 +247,58 @@ addBookToLibrary("Sapiens", "Yuval Noah Harari", 443, false, "Non-fiction");
 addBookToLibrary("The Little Prince", "Antoine de Saint-Exupéry", 96, true, "Fiction");
 addBookToLibrary("Clean Code", "Robert C. Martin", 464, false, "Programming");
 
+const bookDetailDialog = document.querySelector("#book-detail-dialog");
+let currentBookId = null;
 
+shelvesContainer.addEventListener("click", (event) => {
+  const book = event.target.closest(".book");
+  if (!book) return; 
+
+  currentBookId = book.dataset.id;
+  const matchingBook = myLibrary.find((b) => b.id === currentBookId);
+
+  document.querySelector("#detail-title").textContent = matchingBook.title;
+  document.querySelector("#detail-author").textContent = matchingBook.author;
+  document.querySelector("#detail-pages").textContent = matchingBook.pages;
+  document.querySelector("#detail-genre").textContent = matchingBook.genre;
+
+  const togglePill = document.querySelector(".toggle-pill");
+
+  if (matchingBook.read) {
+    togglePill.classList.add("is-read");
+  } else {
+    togglePill.classList.remove("is-read");
+  }
+
+  bookDetailDialog.showModal();
+});
+
+document.querySelector("#close-detail-btn").addEventListener("click", () => {
+  bookDetailDialog.close();
+});
+
+document.querySelector("#remove-book-btn").addEventListener("click", () => {
+  const indexToRemove = myLibrary.findIndex((book) => book.id === currentBookId);
+
+  if (indexToRemove !== -1) {
+    myLibrary.splice(indexToRemove, 1);
+  }
+  updateDOM();
+  bookDetailDialog.close();
+});
+
+document.querySelector(".toggle-pill").addEventListener("click", () => {
+  const matchingBook = myLibrary.find((b) => b.id === currentBookId);
+  const togglePill = document.querySelector(".toggle-pill");
+
+  if (matchingBook.read) {
+    togglePill.classList.remove("is-read");
+    matchingBook.read = false;
+  } else {
+    togglePill.classList.add("is-read");
+    matchingBook.read = true;
+  }
+
+  updateDOM();
+
+});

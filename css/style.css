@@ -36,13 +36,14 @@ body{
 
 .book {
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 5fr 17px;
     grid-template-rows: 1fr 0.5fr 7fr 0.5fr 1fr;
     box-shadow: 
         2px 4px 6px rgba(0, 0, 0, 0.4),
         -2px 0 4px rgba(0, 0, 0, 0.5) inset;
     z-index: 1;
     height: 320px;
+    cursor: pointer;
 }
 
 .book:hover {
@@ -65,15 +66,17 @@ body{
     justify-content: center;
 }
 
-h1 {
+.book h1 {
     font-weight: 600;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
+    cursor: pointer;
 }
 
-h2 {
+.book h2 {
     font-weight: 400;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
 }
 
 .book-end {
@@ -202,6 +205,14 @@ dialog button:hover {
 .toggle-pill button:focus-visible {
   outline: 2px solid #f3e6d8;
   outline-offset: 2px;
+}
+
+.toggle-pill.is-read {
+  background-color: #4a6b3a; 
+}
+
+.toggle-pill.is-read button {
+  margin-left: auto; 
 }
 
 dialog[open] {
