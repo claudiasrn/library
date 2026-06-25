@@ -18,7 +18,7 @@
         <hr>
         <div class="toggle-row">
             <span>Read</span>
-            <div class="toggle-pill">
+            <div class="toggle-pill-detail">
                 <button id="toggle-read-btn"></button>
             </div>
         </div>
@@ -26,6 +26,43 @@
             <button id="remove-book-btn">Remove</button>
             <button id="close-detail-btn">Close</button>
         </div>
+    </dialog>
+    <dialog id="add-book-dialog">
+        <h1>New Book</h1>
+        <form id="add-book-form">
+            <div class="form-row">
+            <label>
+                Title
+                <input type="text" name="title" required>
+            </label>
+            <label>
+                Author
+                <input type="text" name="author" required>
+            </label>
+            <label>
+                Pages
+                <input type="number" name="pages" min="1" required>
+            </label>
+            <label>
+                Genre
+                <input type="text" name="genre" required>
+            </label>
+            </div>
+
+            <div class="toggle-row">
+                <span>Read</span>
+                <div class="toggle-pill-new">
+                    <button type="button" id="new-book-toggle"></button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="dialog-actions">
+                <button type="button" id="cancel-add-btn">Cancel</button>
+                <button type="submit" disabled>Add Book</button>
+            </div>
+        </form>
     </dialog>
 </body>
 </html>

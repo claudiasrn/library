@@ -113,6 +113,11 @@ body{
     color: rgba(243, 230, 216, 0.8);
 }
 
+.book-end:hover > button {
+  background-color: rgba(255,255,255,0.08);
+  color: rgba(243, 230, 216, 0.8);
+}
+
 dialog {
   background-color: #f0e6d2;
   background: radial-gradient(ellipse at center, #f5ead3 0%, #e8d9b8 100%);
@@ -180,7 +185,8 @@ dialog button:hover {
   text-decoration: underline;
 }
 
-.toggle-pill {
+.toggle-pill-detail,
+.toggle-pill-new {
     height: 30px;
     border-radius: 20px;
     background-color: #8a611c;
@@ -189,7 +195,8 @@ dialog button:hover {
     width: 60px;
 }
 
-.toggle-pill button {
+.toggle-pill-detail button,
+.toggle-pill-new button {
     background-color: #6b4226;
     height: 20px;
     width: 20px;
@@ -197,21 +204,25 @@ dialog button:hover {
     margin: 5px;
 }
 
-.toggle-pill:focus-within {
+.toggle-pill-detail:focus-within,
+.toggle-pill-new:focus-within {
   outline: 2px solid #8a611c;
   outline-offset: 2px;
 }
 
-.toggle-pill button:focus-visible {
+.toggle-pill-detail button:focus-visible,
+.toggle-pill-new button:focus-visible {
   outline: 2px solid #f3e6d8;
   outline-offset: 2px;
 }
 
-.toggle-pill.is-read {
+.toggle-pill-detail.is-read,
+.toggle-pill-new.is-read {
   background-color: #4a6b3a; 
 }
 
-.toggle-pill.is-read button {
+.toggle-pill-detail.is-read button,
+.toggle-pill-new.is-read button {
   margin-left: auto; 
 }
 
@@ -219,4 +230,46 @@ dialog[open] {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+dialog input {
+  background-color: #fdf8ee;
+  border: 1px solid #8a611c;
+  border-radius: 2px;
+  font-family: inherit;
+  color: #3a2a0c;
+  padding: 4px 8px;
+}
+
+dialog input:focus-visible {
+  outline: 2px solid #8a611c;
+  outline-offset: 2px;
+}
+
+dialog:focus-visible {
+  outline: 2px solid #8a611c;
+  outline-offset: 4px;
+}
+
+#add-book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+dialog button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

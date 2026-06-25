@@ -246,13 +246,25 @@ addBookToLibrary("Dune", "Frank Herbert", 688, true, "Sci-Fi");
 addBookToLibrary("Sapiens", "Yuval Noah Harari", 443, false, "Non-fiction");
 addBookToLibrary("The Little Prince", "Antoine de Saint-Exupéry", 96, true, "Fiction");
 addBookToLibrary("Clean Code", "Robert C. Martin", 464, false, "Programming");
+addBookToLibrary("Brave New World", "Aldous Huxley", 311, true, "Dystopian");
+addBookToLibrary("The Catcher in the Rye", "J.D. Salinger", 277, false, "Fiction");
+addBookToLibrary("Educated", "Tara Westover", 334, true, "Memoir");
+addBookToLibrary("The Lean Startup", "Eric Ries", 336, false, "Business");
+addBookToLibrary("Norwegian Wood", "Haruki Murakami", 296, true, "Fiction");
+addBookToLibrary("The Design of Everyday Things", "Don Norman", 368, false, "Design");
+addBookToLibrary("Crime and Punishment", "Fyodor Dostoevsky", 671, false, "Classic");
+addBookToLibrary("Thinking, Fast and Slow", "Daniel Kahneman", 499, true, "Psychology");
+addBookToLibrary("The Alchemist", "Paulo Coelho", 208, true, "Fiction");
+addBookToLibrary("Deep Work", "Cal Newport", 296, false, "Self-help");
+addBookToLibrary("Frankenstein", "Mary Shelley", 280, true, "Horror");
+addBookToLibrary("You Don't Know JS", "Kyle Simpson", 278, false, "Programming");
 
 const bookDetailDialog = document.querySelector("#book-detail-dialog");
 let currentBookId = null;
 
 shelvesContainer.addEventListener("click", (event) => {
   const book = event.target.closest(".book");
-  if (!book) return; 
+  if (!book) return;
 
   currentBookId = book.dataset.id;
   const matchingBook = myLibrary.find((b) => b.id === currentBookId);
@@ -262,7 +274,7 @@ shelvesContainer.addEventListener("click", (event) => {
   document.querySelector("#detail-pages").textContent = matchingBook.pages;
   document.querySelector("#detail-genre").textContent = matchingBook.genre;
 
-  const togglePill = document.querySelector(".toggle-pill");
+  const togglePill = document.querySelector(".toggle-pill-detail");
 
   if (matchingBook.read) {
     togglePill.classList.add("is-read");
@@ -283,13 +295,14 @@ document.querySelector("#remove-book-btn").addEventListener("click", () => {
   if (indexToRemove !== -1) {
     myLibrary.splice(indexToRemove, 1);
   }
+
   updateDOM();
   bookDetailDialog.close();
 });
 
-document.querySelector(".toggle-pill").addEventListener("click", () => {
+document.querySelector(".toggle-pill-detail").addEventListener("click", () => {
   const matchingBook = myLibrary.find((b) => b.id === currentBookId);
-  const togglePill = document.querySelector(".toggle-pill");
+  const togglePill = document.querySelector(".toggle-pill-detail");
 
   if (matchingBook.read) {
     togglePill.classList.remove("is-read");
@@ -300,5 +313,50 @@ document.querySelector(".toggle-pill").addEventListener("click", () => {
   }
 
   updateDOM();
+});
 
+
+
+const addBookDialog = document.querySelector("#add-book-dialog");
+const addBookForm = document.querySelector("#add-book-form");
+const addBookSubmitBtn = addBookForm.querySelector('button[type="submit"]');
+
+const titleInput = document.querySelector('input[name="title"]');
+const authorInput = document.querySelector('input[name="author"]');
+const pagesInput = document.querySelector('input[name="pages"]');
+const genreInput = document.querySelector('input[name="genre"]');
+
+shelvesContainer.addEventListener("click", (event) => {
+  const lastBook = event.target.closest(".book-end");
+  if (!lastBook) return;
+
+  addBookDialog.showModal();
+});
+
+document.querySelector("#cancel-add-btn").addEventListener("click", () => {
+  addBookDialog.close();
+});
+
+document.querySelector(".toggle-pill-new").addEventListener("click", () => {
+  const togglePill = document.querySelector(".toggle-pill-new");
+  togglePill.classList.toggle("is-read");
+});
+
+addBookForm.addEventListener("input", () => {
+  addBookSubmitBtn.disabled = !addBookForm.checkValidity();
+});
+
+addBookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const pages = Number(pagesInput.value);
+  const genre = genreInput.value;
+  const read = document.querySelector(".toggle-pill-new").classList.contains("is-read");
+
+  addBookToLibrary(title, author, pages, read, genre);
+
+  addBookDialog.close();
+  addBookForm.reset();
 });
