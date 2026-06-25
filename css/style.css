@@ -109,3 +109,103 @@ h2 {
     background-color: rgba(255,255,255,0.08);
     color: rgba(243, 230, 216, 0.8);
 }
+
+dialog {
+  background-color: #f0e6d2;
+  background: radial-gradient(ellipse at center, #f5ead3 0%, #e8d9b8 100%);
+  border: 2px solid #8a611c;
+  border-radius: 2px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #3a2a0c;
+  padding: 24px 28px;
+  min-width: 260px;
+}
+
+dialog h1 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #8a611c;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+dialog p {
+  margin: 4px 0;
+}
+
+dialog::backdrop {
+  background-color: rgba(31, 26, 23, 0.7);
+}
+
+dialog button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: #8a611c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+dialog hr {
+  border: none;
+  border-top: 1px solid rgba(138, 97, 28, 0.3);
+  margin: 8px 0;
+}
+
+#remove-book-btn {
+  color: #7a3327;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+dialog button {
+  text-decoration: none;
+}
+
+dialog button:hover {
+  text-decoration: underline;
+}
+
+.toggle-pill {
+    height: 30px;
+    border-radius: 20px;
+    background-color: #8a611c;
+    display: flex;
+    align-items: center;
+    width: 60px;
+}
+
+.toggle-pill button {
+    background-color: #6b4226;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.toggle-pill:focus-within {
+  outline: 2px solid #8a611c;
+  outline-offset: 2px;
+}
+
+.toggle-pill button:focus-visible {
+  outline: 2px solid #f3e6d8;
+  outline-offset: 2px;
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

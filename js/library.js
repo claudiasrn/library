@@ -90,8 +90,8 @@ function addBookToLibrary(title, author, pages, read, genre) {
 }
 
 function updateDOM() {
-    const body = document.querySelector("body");
-    body.innerHTML = "";
+    const shelvesContainer = document.querySelector(".shelves-container");
+    shelvesContainer.innerHTML = "";
 
     let bookRow;
     let index = 0;
@@ -101,7 +101,7 @@ function updateDOM() {
     function addShelf() {
         let shelf = document.createElement("div");
         shelf.classList.add("shelf");
-        body.append(shelf);
+        shelvesContainer.append(shelf);
 
         bookRow = document.createElement("div");
         bookRow.classList.add("book-row");
@@ -114,7 +114,6 @@ function updateDOM() {
     
     let booksPerRow = Math.floor( (bookRow.clientWidth + 3)  / (100 + 3) );
     let shelvesNeeded = Math.ceil( (myLibrary.length + 1) / booksPerRow );
-    console.log("booksPerRow:", booksPerRow, "shelvesNeeded:", shelvesNeeded);
 
     addBooksInShelf();
 
@@ -222,8 +221,6 @@ function updateDOM() {
     button.textContent = "+";
     bookEnd.append(button);
     bookRow.append(bookEnd);
-
-    console.log("books rendered:", document.querySelectorAll(".book").length);
 }
 
 function mapLengthToFontSize(text, minFontSize, maxFontSize, minLength, maxLength) {
@@ -247,3 +244,5 @@ addBookToLibrary("Dune", "Frank Herbert", 688, true, "Sci-Fi");
 addBookToLibrary("Sapiens", "Yuval Noah Harari", 443, false, "Non-fiction");
 addBookToLibrary("The Little Prince", "Antoine de Saint-Exupéry", 96, true, "Fiction");
 addBookToLibrary("Clean Code", "Robert C. Martin", 464, false, "Programming");
+
+

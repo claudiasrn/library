@@ -9,6 +9,23 @@
     <title>Library</title>
 </head>
 <body>
-
+    <div class="shelves-container"></div>
+    <dialog id="book-detail-dialog">
+        <h1 id="detail-title"></h1>
+        <p><strong>Author:</strong> <span id="detail-author"></span></p>
+        <p><strong>Pages:</strong> <span id="detail-pages"></span></p>
+        <p><strong>Genre:</strong> <span id="detail-genre"></span></p>
+        <hr>
+        <div class="toggle-row">
+            <span>Read</span>
+            <div class="toggle-pill">
+                <button id="toggle-read-btn"></button>
+            </div>
+        </div>
+        <div class="dialog-actions">
+            <button id="remove-book-btn">Remove</button>
+            <button id="close-detail-btn">Close</button>
+        </div>
+    </dialog>
 </body>
 </html>
