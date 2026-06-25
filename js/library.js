@@ -312,7 +312,9 @@ document.querySelector("#remove-book-btn").addEventListener("click", () => {
     myLibrary.splice(indexToRemove, 1);
   }
 
+  const scrollPosition = window.scrollY;
   updateDOM();
+  window.scrollTo({ top: scrollPosition });
   bookDetailDialog.close();
 });
 
@@ -328,7 +330,9 @@ document.querySelector(".toggle-pill-detail").addEventListener("click", () => {
     matchingBook.read = true;
   }
 
+  const scrollPosition = window.scrollY;
   updateDOM();
+  window.scrollTo({ top: scrollPosition });
 });
 
 
@@ -351,6 +355,7 @@ shelvesContainer.addEventListener("click", (event) => {
 
 document.querySelector("#cancel-add-btn").addEventListener("click", () => {
   addBookDialog.close();
+  addBookForm.reset();
 });
 
 document.querySelector(".toggle-pill-new").addEventListener("click", () => {
@@ -371,8 +376,17 @@ addBookForm.addEventListener("submit", (event) => {
   const genre = genreInput.value;
   const read = document.querySelector(".toggle-pill-new").classList.contains("is-read");
 
+  const scrollPosition = window.scrollY;
   addBookToLibrary(title, author, pages, read, genre);
+  window.scrollTo({ top: scrollPosition });
 
   addBookDialog.close();
   addBookForm.reset();
 });
+
+function preventScrollJump() {
+  window.scrollTo({ top: window.scrollY });
+}
+
+bookDetailDialog.addEventListener("close", preventScrollJump);
+addBookDialog.addEventListener("close", preventScrollJump);
