@@ -24,6 +24,7 @@ body{
     grid-auto-columns: 100px;
     gap: 3px;
     height: 320px;
+    align-items: end;
 }
 
 .ledge {
@@ -76,6 +77,7 @@ body{
 .book h2 {
     font-weight: 400;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
     cursor: pointer;
 }
 

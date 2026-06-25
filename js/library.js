@@ -94,6 +94,11 @@ function addBookToLibrary(title, author, pages, read, genre) {
 function updateDOM() {
     shelvesContainer.innerHTML = "";
 
+    const pageCounts = myLibrary.map((book) => book.pages);
+    const minPages = Math.min(...pageCounts);
+    const maxPages = Math.max(...pageCounts);
+
+
     let bookRow;
     let index = 0;
 
@@ -127,6 +132,8 @@ function updateDOM() {
             book.style.backgroundColor = spineColors[colorIndex].bodyMedium;
             book.classList.add("book");
             book.dataset.id = myLibrary[index].id;
+            let bookHeight = mapPagesToHeight(myLibrary[index].pages, 200, 320, minPages, maxPages);
+            book.style.height = `${bookHeight}px`;
             bookRow.append(book);
 
             let bodyDark1 = document.createElement("div");
@@ -234,6 +241,15 @@ function mapLengthToFontSize(text, minFontSize, maxFontSize, minLength, maxLengt
   let ratio = (maxLength - length) / (maxLength - minLength);
 
   return minFontSize + ratio * (maxFontSize - minFontSize);
+}
+
+function mapPagesToHeight(pages, minHeight, maxHeight, minPages, maxPages) {
+  if (minPages === maxPages) {
+    return (minHeight + maxHeight) / 2; // no range to scale across, just pick the middle
+  }
+
+  let ratio = (pages - minPages) / (maxPages - minPages);
+  return minHeight + ratio * (maxHeight - minHeight);
 }
 
 window.addEventListener("resize", updateDOM);
