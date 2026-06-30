@@ -75,14 +75,21 @@ const myLibrary = [];
 
 const shelvesContainer = document.querySelector(".shelves-container");
 
-function Book(title, author, pages, read, genre) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.genre = genre;
-    this.colorIndex = Math.floor(Math.random() * spineColors.length);
+class Book {
+
+    constructor(title, author, pages, read, genre) {
+      this.id = crypto.randomUUID();
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.read = read;
+      this.genre = genre;
+      this.colorIndex = Math.floor(Math.random() * spineColors.length);
+    }
+
+    toggleRead() {
+      this.read = !this.read;
+    }
 }
 
 function addBookToLibrary(title, author, pages, read, genre) {
@@ -320,15 +327,10 @@ document.querySelector("#remove-book-btn").addEventListener("click", () => {
 
 document.querySelector(".toggle-pill-detail").addEventListener("click", () => {
   const matchingBook = myLibrary.find((b) => b.id === currentBookId);
+  matchingBook.toggleRead();
+  
   const togglePill = document.querySelector(".toggle-pill-detail");
-
-  if (matchingBook.read) {
-    togglePill.classList.remove("is-read");
-    matchingBook.read = false;
-  } else {
-    togglePill.classList.add("is-read");
-    matchingBook.read = true;
-  }
+  togglePill.classList.toggle("is-read", matchingBook.read);
 
   const scrollPosition = window.scrollY;
   updateDOM();
